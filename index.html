@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furban Jungle Registration System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-200">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-primary">Furban Jungle Registration System</h1>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Registration Form -->
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-4">User Details</h2>
+                <form id="bookingForm" class="space-y-4">
+                    <div>
+                        <label for="participantName" class="block mb-1">Name</label>
+                        <input type="text" id="participantName" class="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-700 text-base" required>
+                    </div>
+                    <div>
+                        <label for="contactMedium" class="block mb-1">Contact Medium</label>
+                        <select id="contactMedium" class="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-700 text-base" required>
+                            <option value="">Select Contact Medium</option>
+                            <option value="Telegram">Telegram</option>
+                            <option value="Email">Email</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="username" class="block mb-1">Username</label>
+                        <input type="text" id="username" class="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-700 text-base" required>
+                    </div>
+                    <div>
+                        <label for="password" class="block mb-1">Password</label>
+                        <input type="password" id="password" class="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-700 text-base" required>
+                    </div>
+                    <input type="hidden" id="shiftKey" value="3">
+                    <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-2 px-4 rounded transition-colors">
+                        Save Booking
+                    </button>
+                </form>
+            </div>
+
+            <!-- QR Code Display -->
+            <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-4">Registration QR Code</h2>
+                <div id="qrCodeContainer" class="flex flex-col items-center justify-center min-h-[300px] bg-white dark:bg-gray-700 rounded-lg p-4">
+                    <p class="text-gray-500 dark:text-gray-400 text-center">QR code will appear here after creating a registration</p>
+                </div>
+                <div id="bookingDetails" class="mt-4 p-4 bg-white dark:bg-gray-700 rounded-lg hidden">
+                    <h3 class="font-semibold mb-2">Registration Details:</h3>
+                    <div id="bookingInfo" class="text-sm"></div>
+                    <div class="mt-4">
+                        <button id="downloadQR" class="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-4 rounded transition-colors hidden">
+                            Save QR Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saved Registrations -->
+        <div class="mt-8 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                <h2 class="text-xl font-semibold">Saved Registrations [ Remember to export CSV before closing!! ] </h2>
+                <div class="flex flex-wrap gap-2">
+                    <button id="exportCSV" class="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-4 rounded transition-colors">
+                        Export CSV
+                    </button>
+                    <label for="importCSV" class="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-4 rounded transition-colors cursor-pointer">
+                        Import CSV
+                    </label>
+                    <input type="file" id="importCSV" accept=".csv" class="hidden">
+                    <button id="toggleTheme" class="bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-bold py-2 px-4 rounded transition-colors">
+                        <span id="themeIcon">🌙</span>
+                    </button>
+                </div>
+            </div>
+            <div id="savedBookings" class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Registrations will be displayed here -->
+                <p id="noBookings" class="text-gray-500 dark:text-gray-400 col-span-full text-center py-4">No registrations saved yet</p>
+            </div>
+        </div>
+        
+        <!-- Version Timestamp -->
+        <div class="mt-8 text-center text-xs text-gray-500 dark:text-gray-400 py-2">
+            <p>v250615</p>
+            <p>© 2025 Mikazuki Fox / Leo Chan</p>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
